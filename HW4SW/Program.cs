@@ -31,8 +31,8 @@ if (args.Length is 1 && args[0] == "nats")
         {
             Console.WriteLine("No new messages");
         }
-        Console.WriteLine("Wait 1 sec");
-        await Task.Delay(1000);
+        Console.WriteLine("Wait 50 nsec");
+        await Task.Delay(50);
     }
 }
 
@@ -75,6 +75,7 @@ if (args.Length is 0)
                             byte[] bytes = Encoding.UTF8.GetBytes(source);
                             connection.Publish(configure.Tittle, bytes);
                             chars = new();
+                            await Task.Delay(100);
                         }
                         break;
                     }
@@ -82,7 +83,6 @@ if (args.Length is 0)
                     default: chars.Add(c); break;
                 }
             }
-            await Task.Delay(1000);
         }
     }
     catch (Exception ex) { Console.WriteLine($"Error: {ex.Message}"); }
